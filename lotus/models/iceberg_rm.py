@@ -12,7 +12,6 @@ from lotus.models.faiss_rm import FaissRM
 
 
 class IcebergRM(FaissRM):
-
     def __init__(self, 
                  spark: SparkSession,
                  max_batch_size: int = 64,

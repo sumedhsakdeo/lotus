@@ -20,7 +20,10 @@ class SemIndexDataframe:
         if not isinstance(obj, pd.DataFrame):
             raise AttributeError("Must be a DataFrame")
 
+<<<<<<< HEAD
     @operator_cache
+=======
+>>>>>>> 55cfe9a (Load pre-computed embedding from the Iceberg table)
     def __call__(self, col_name: str, index_dir: str, static_rm: RM | None = None) -> pd.DataFrame:
         """
         Index a column in the DataFrame.
