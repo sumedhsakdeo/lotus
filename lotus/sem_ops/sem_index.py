@@ -1,8 +1,9 @@
 from typing import Any
 
 import pandas as pd
-
+from lotus.models import RM
 import lotus
+from lotus.cache import operator_cache
 
 
 @pd.api.extensions.register_dataframe_accessor("sem_index")
@@ -19,13 +20,18 @@ class SemIndexDataframe:
         if not isinstance(obj, pd.DataFrame):
             raise AttributeError("Must be a DataFrame")
 
-    def __call__(self, col_name: str, index_dir: str) -> pd.DataFrame:
+<<<<<<< HEAD
+    @operator_cache
+=======
+>>>>>>> 55cfe9a (Load pre-computed embedding from the Iceberg table)
+    def __call__(self, col_name: str, index_dir: str, static_rm: RM | None = None) -> pd.DataFrame:
         """
         Index a column in the DataFrame.
 
         Args:
             col_name (str): The column name to index.
             index_dir (str): The directory to save the index.
+            static_rm (RM | None): The retrieval model to use. If None, the model configured in lotus.settings will be used.
 
         Returns:
             pd.DataFrame: The DataFrame with the index directory saved.
@@ -35,7 +41,7 @@ class SemIndexDataframe:
                 "The retrieval model must be an instance of RM. Please configure a valid retrieval model using lotus.settings.configure()"
             )
 
-        rm = lotus.settings.rm
+        rm = static_rm or lotus.settings.rm
         rm.index(self._obj[col_name], index_dir)
         self._obj.attrs["index_dirs"][col_name] = index_dir
         return self._obj

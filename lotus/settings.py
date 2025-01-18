@@ -1,4 +1,5 @@
 import lotus.models
+import lotus.vector_store
 from lotus.types import SerializationFormat
 
 # NOTE: Settings class is not thread-safe
@@ -10,10 +11,10 @@ class Settings:
     rm: lotus.models.RM | None = None
     helper_lm: lotus.models.LM | None = None
     reranker: lotus.models.Reranker | None = None
+    vs: lotus.vector_store.VS | None = None 
 
     # Cache settings
-    enable_message_cache: bool = False
-    enable_operator_cache: bool = False
+    enable_cache: bool = False
 
     # Serialization setting
     serialization_format: SerializationFormat = SerializationFormat.DEFAULT
